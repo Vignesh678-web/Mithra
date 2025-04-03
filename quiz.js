@@ -22,7 +22,7 @@ const quiz =[
     {
         question:"You accidently hurt someone's feeling online what should you do? 😥",
         options:["A) ignore it 😮", "B) Apologize and learn from it 🙅🏼‍♂️", "C) Block them  🚫 ","D) Make fun of them more 🤣"],
-        correct: "A"
+        correct: "B"
 
     },
     {
