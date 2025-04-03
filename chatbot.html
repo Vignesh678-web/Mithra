@@ -1,0 +1,124 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parental Chatbot - Martha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url("martha background.jpg") no-repeat center center fixed;
+            background-size: cover;
+        }
+        .chat-container {
+            width: 350px;
+            border: 2px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(249,249,249,0.9);
+            margin: auto;
+            margin-top: 50px;
+        }
+        .chat-box {
+            height: 250px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+            padding: 5px;
+            text-align: left;
+        }
+        .user-input {
+            width: calc(100% - 20px);
+            padding: 5px;
+            margin-top: 10px;
+        }
+        .send-btn {
+            padding: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .bot-avatar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .bot-avatar {
+            width: 100px;
+            height: 100px;
+            background: url("martha happy.jpg") no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+        }
+        .bot-message {
+            background: #d1ecf1;
+            padding: 5px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .user-message {
+            background: #c3e6cb;
+            padding: 5px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="bot-avatar-container">
+            <div class="bot-avatar" id="botAvatar"></div>
+        </div>
+        <div class="chat-box" id="chatBox"></div>
+        <input type="text" id="userInput" class="user-input" placeholder="Ask me a question?">
+        <button class="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+      function sendMessage() {
+    let input = document.getElementById("userInput").value.toLowerCase().trim();
+    let chatBox = document.getElementById("chatBox");
+    let botAvatar = document.getElementById("botAvatar");
+
+    let responses = {
+        "hello": "👋 Hi there! How can I assist you today? 😊",
+        "hi": "👋 Hey there! How can I help you today? 😊",
+        "how are you": "I'm doing great, thanks for asking! How about you? 😊",
+        "what's up": "Not much, just here to help! What's up with you? 😁",
+        "goodbye": "👋 Take care! Stay safe online! 🌟",
+        "what is 2 + 2": "🧮 2 + 2 = 4! 🎉",
+        "what is 10 - 3": "🤓 10 - 3 = 7! Keep going! 🚀",
+        "how much is 5 * 6": "🎯 5 times 6 is 30! You're great at this! 💪",
+        "what is 15 / 3": "🧠 15 divided by 3 is 5! Awesome! 🔢",
+        "solve 9 + 8": "🔢 9 + 8 = 17! Well done! 👏",
+        "what is 12 * 4": "🔥 12 times 4 is 48! Math is fun! 📚",
+        "tell me about online safety": "🔒 Online safety means protecting your personal info and avoiding risks while surfing the web. Stay smart! 🛡️",
+        "can you help me set parental controls": "🛑 Absolutely! You can set up parental controls through your device settings or apps like Family Link. Need help with something specific? 📱",
+        "bye": "👋 Goodbye! Stay safe online and have a great day! 🌟",
+        "what should i do if my child encounters cyberbullying": "😟 If your child is experiencing cyberbullying, encourage them to talk to you. Block the bully, report the incident, and document the messages. You're not alone in this! 💙",
+        "how can i teach my child about online privacy": "🔐 Teach your child not to share personal information online. Use strong passwords and adjust privacy settings on social media! 🚀"
+    };
+
+    let response = responses[input] || "🤔 I'm not sure about that. Try asking something else!";
+
+    if (input in responses) {
+        if (["hello", "hi", "how are you"].includes(input)) {
+            botAvatar.style.background = "url('martha happy.jpg') no-repeat center center";
+        } else if (["bye", "goodbye"].includes(input)) {
+            botAvatar.style.background = "url('martha sad.jpg') no-repeat center center";
+        } else if (input.startsWith("what is") || input.startsWith("solve")) {
+            botAvatar.style.background = "url('martha surprised.jpg') no-repeat center center";
+        } else {
+            botAvatar.style.background = "url('martha thinking2.jpg') no-repeat center center";
+        }
+    }
+
+    botAvatar.style.backgroundSize = "cover";
+    chatBox.innerHTML += `<p class='user-message'><strong>You:</strong> ${input}</p>`;
+    chatBox.innerHTML += `<p class='bot-message'><strong>Martha:</strong> ${response}</p>`;
+
+    document.getElementById("userInput").value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+   </script>
+</body>
+</html>

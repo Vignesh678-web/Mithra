@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchandise - Kids Safety</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            margin: 0;
+            padding: 0;
+        }
+        .merchandise-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: #ff5733;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .item {
+            width: 220px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+        .item:hover {
+            transform: scale(1.05);
+        }
+        .item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .item p {
+            font-size: 16px;
+            color: #333;
+            margin: 8px 0;
+        }
+        .price {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 18px;
+        }
+        .select-item {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            transform: scale(1.5);
+        }
+        .buy-button {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 16px;
+            background: #ff5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .buy-button:hover {
+            background: #e04e2a;
+        }
+        .sort-container {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="merchandise-container">
+        <h2>Merchandise</h2>
+        
+        <h3>Toys</h3>
+        <div class="sort-container">
+            <label for="sort-toys">Sort by Price:</label>
+            <select id="sort-toys" onchange="sortItems('toys')">
+                <option value="asc">Low to High</option>
+                <option value="desc">High to Low</option>
+            </select>
+        </div>
+        <div class="section" id="toys">
+            <div class="item" data-price="699">
+                <input type="checkbox" class="select-item">
+                <img src="toy 1.jpg" alt="Toy 1">
+                <p>Dinausaur set</p>
+                <p class="price">₹699</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="item" data-price="499">
+                <input type="checkbox" class="select-item">
+                <img src="toy2 .jpg" alt="Toy 2">
+                <p>Animal set</p>
+                <p class="price">₹499</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="item" data-price="1599">
+                <input type="checkbox" class="select-item">
+                <img src="toy 3.jpg" alt="Toy 3">
+                <p>Hot Wheels</p>
+                <p class="price">₹1,599</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="item" data-price="799">
+                <input type="checkbox" class="select-item">
+                <img src="toy 4.jpg" alt="Toy 4">
+                <p>Barbie</p>
+                <p class="price">₹799</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+        </div>
+        
+        <h3>Boys' Fashion</h3>
+        <div class="sort-container">
+            <label for="sort-boys-fashion">Sort by Price:</label>
+            <select id="sort-boys-fashion" onchange="sortItems('boys-fashion')">
+                <option value="asc">Low to High</option>
+                <option value="desc">High to Low</option>
+            </select>
+        </div>
+        <div class="section" id="boys-fashion">
+            <div class="item" data-price="5999">
+                <input type="checkbox" class="select-item">
+                <img src="boy 1.jpg" alt="Fashion 1">
+                <p>Casual Streetwear</p>
+                <p class="price">₹5,999</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="item" data-price="6500">
+                <input type="checkbox" class="select-item">
+                <img src="boy 2.jpg" alt="Fashion 1">
+                <p>Urban Casual Adventurer</p>
+                <p class="price">₹6,500</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="item" data-price="4000">
+                <input type="checkbox" class="select-item">
+                <img src="boy 3.jpg" alt="Fashion 1">
+                <p>Casual Streetwear Cool</p>
+                <p class="price">₹4,000</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="item" data-price="13000">
+                <input type="checkbox" class="select-item">
+                <img src="boy 4.jpg" alt="Fashion 1">
+                <p>Minimalist Monochrome Trend</p>
+                <p class="price">₹13,000</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+        </div>
+        
+        
+        <h3>Girls' Fashion</h3>
+        <div class="sort-container">
+            <label for="sort-girls-fashion">Sort by Price:</label>
+            <select id="sort-girls-fashion" onchange="sortItems('girls-fashion')">
+                <option value="asc">Low to High</option>
+                <option value="desc">High to Low</option>
+            </select>
+        </div>
+        <div class="section" id="girls-fashion">
+            <div class="item" data-price="1699">
+                <input type="checkbox" class="select-item">
+                <img src="girl 1.jpg" alt="Fashion 2">
+                <p>Beige Blazer With Black Faux Leather Leggings</p>
+                <p class="price">₹1,699</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+        
+        <div class="item" data-price="4999">
+            <input type="checkbox" class="select-item">
+            <img src="girl 3.jpg" alt="Fashion 2">
+            <p>Liliac Blazer with Matching Wide-Leg Trousers</p>
+            <p class="price">₹4,999</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="item" data-price="5999">
+            <input type="checkbox" class="select-item">
+            <img src="girl 4.jpg" alt="Fashion 2">
+            <p>Cozy Vintage chic</p>
+            <p class="price">₹5999</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="item" data-price="1599">
+            <input type="checkbox" class="select-item">
+            <img src="girl 2.jpg" alt="Fashion 2">
+            <p>Graphic Tshirt with Green Skirt(Dior Paris Design)</p>
+            <p class="price">₹1,599</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+    </div>
+    
+    <script>
+        function sortItems(sectionId) {
+            const section = document.getElementById(sectionId);
+            const items = Array.from(section.getElementsByClassName('item'));
+            const sortOrder = document.getElementById(`sort-${sectionId}`).value;
+            
+            items.sort((a, b) => {
+                const priceA = parseInt(a.getAttribute('data-price'));
+                const priceB = parseInt(b.getAttribute('data-price'));
+                return sortOrder === 'asc' ? priceA - priceB : priceB - priceA;
+            });
+            
+            section.innerHTML = '';
+            items.forEach(item => section.appendChild(item));
+        }
+
+    </script>
+</body>
+</html>

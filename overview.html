@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child's Online Activity Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7fc; margin: 0; padding: 0; }
+        .container { max-width: 900px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .card { background: #eef2ff; padding: 15px; margin: 15px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+        .chart-container { width: 100%; height: 300px; }
+        h2 { text-align: center; color: #333; }
+        .btn-refresh { display: block; width: 100%; text-align: center; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .btn-refresh:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📊 Child's Online Activity Summary</h2>
+        <button class="btn-refresh" onclick="refreshData()">🔄 Refresh Data</button>
+        <div class="card">
+            <h3>⏳ Screen Time: <span id="screenTime">Loading...</span> hrs</h3>
+        </div>
+        <div class="card">
+            <h3>🌐 Websites Visited</h3>
+            <ul id="websitesList">Loading...</ul>
+        </div>
+        <div class="card">
+            <h3>⚠️ Flagged Content Alerts</h3>
+            <p id="alerts">Loading...</p>
+        </div>
+        <div class="card">
+            <h3>🛡️ Overall Safety Score: <span id="safetyScore">Loading...</span>%</h3>
+            <div class="chart-container">
+                <canvas id="safetyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let safetyChart;
+        
+        function refreshData() {
+            const childData = {
+                screenTime: (Math.random() * 5).toFixed(1),
+                websites: ["kidsgames.com", "educational-site.org", "youtube.com"],
+                flaggedContent: Math.random() > 0.7 ? "Inappropriate content detected!" : "None detected",
+                safetyScore: Math.floor(Math.random() * 100)
+            };
+
+            document.getElementById("screenTime").innerText = childData.screenTime;
+            document.getElementById("alerts").innerText = childData.flaggedContent;
+            document.getElementById("safetyScore").innerText = childData.safetyScore;
+
+            const websitesList = document.getElementById("websitesList");
+            websitesList.innerHTML = childData.websites.map(site => `<li>${site}</li>`).join('');
+            
+            const ctx = document.getElementById("safetyChart").getContext("2d");
+            if (safetyChart) {
+                safetyChart.destroy();
+            }
+            safetyChart = new Chart(ctx, {
+                type: "doughnut",
+                data: {
+                    labels: ["Safe", "Potential Risk"],
+                    datasets: [{
+                        data: [childData.safetyScore, 100 - childData.safetyScore],
+                        backgroundColor: ["#4CAF50", "#FF5733"]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        window.onload = refreshData;
+    </script>
+</body>
+</html>

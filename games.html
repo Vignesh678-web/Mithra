@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Games</title>
+        <style>
+            body {
+                font-family: 'poppins',sans-serif;
+                text-align: center;
+                background-image: url("games.png");
+                background-size: cover;
+            }
+            h1 {
+
+                font-size: 2.5em;
+                margin-top: 20px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            }
+            .game-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+                gap: 25px;
+                padding: 30px;
+                max-width: 1000px;
+                margin: auto;
+            }
+            .game-card:hover{
+                transform: scale(1.08);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            }
+            .game-card {
+    width: 300px;
+    height: 250px; /* Increased height to fit text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 15px;
+    background: transparent;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding-bottom: 15px; /* Space for text */
+    text-align: center;
+}
+
+.game-card img {
+    width: 100%;
+    height: 70%; /* Adjusted to make space for text */
+    object-fit: cover;
+}
+
+.game-info {
+    padding: 10px 0;
+}
+
+.game-info h3 {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.play-button {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-image 0.3s ease-in-out;
+}
+
+.play-button:hover {
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+}
+
+        </style>
+    </head>
+    <body>
+        <h1> 🎮 Game Zone 🎮</h1>
+        <div class="game-container">
+            <div class="game-card">
+                <img src="screenshot 12.png" alt="Cyber Safety Matching Game">
+                <div class="game-info">
+                    <h3>Cyber Safety Matching Game</h3>
+                    <a href="matching game.html">
+                        <button class="play-button">Play Now</button>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="game-card">
+                <img src="screenshot 2.png" alt="Password Generator Game">
+                <div class="game-info">
+                    <h3>Password Generator Game</h3>
+                    <a href="password.html">
+                        <button class="play-button">Play Now</button>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="game-card">
+                <img src="screenshot 3.png" alt="Multi Choice Game">
+                <div class="game-info">
+                    <h3>Multi Choice Game</h3>
+                    <a href="multichoice.html">
+                        <button class="play-button">Play Now</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>        

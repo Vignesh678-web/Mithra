@@ -1,0 +1,170 @@
+<section class="section">
+    <h2>Activity Monitoring</h2>
+    <p>Track websites visited, social media usage, screen time, flagged content, and parental controls.</p>
+
+   
+    <input type="text" id="search" placeholder="Search activities..." onkeyup="searchActivity()">
+    <label for="dateFilter">Filter by Date:</label>
+    <input type="date" id="dateFilter" onchange="filterByDate()">
+    
+
+    <table id="activityTable">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Platform/Website</th>
+                <th>Duration</th>
+                <th>Device</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>10:30 AM</td>
+                <td>YouTube</td>
+                <td>30 min</td>
+                <td>Phone</td>
+                <td>Video</td>
+                <td style="color: red;">Flagged</td>
+                <td><button onclick="blockSite('YouTube')">Block</button></td>
+            </tr>
+            <tr>
+                <td>11:15 AM</td>
+                <td>National Geographic Kids</td>
+                <td>45 min</td>
+                <td>Tablet</td>
+                <td>Education</td>
+                <td style="color: green;">Safe</td>
+                <td><button onclick="whitelistSite('National Geographic Kids')">Whitelist</button></td>
+            </tr>
+            <tr>
+                <td>1:00 PM</td>
+                <td>Instagram</td>
+                <td>25 min</td>
+                <td>Laptop</td>
+                <td>Social Media</td>
+                <td style="color: orange;">Moderate</td>
+                <td><button onclick="flagSocialMedia('Instagram')">Flag</button></td>
+            </tr>
+            <tr>
+                <td>2:30 PM</td>
+                <td>Facebook</td>
+                <td>40 min</td>
+                <td>Phone</td>
+                <td>Social Media</td>
+                <td style="color: red;">Flagged</td>
+                <td><button onclick="blockSite('Facebook')">Block</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <canvas id="screenTimeChart"></canvas>
+
+    <a href="monitoring.html" class="btn">View Full Monitoring Report</a>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function searchActivity() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let rows = document.querySelectorAll("#activityTable tbody tr");
+
+        rows.forEach(row => {
+            let text = row.innerText.toLowerCase();
+            row.style.display = text.includes(input) ? "" : "none";
+        });
+    }
+
+    function filterByDate() {
+        let selectedDate = document.getElementById("dateFilter").value;
+        console.log("Filtering by date: " + selectedDate);
+    }
+
+    function blockSite(site) {
+        alert(site + " has been blocked.");
+    }
+
+    function whitelistSite(site) {
+        alert(site + " has been whitelisted.");
+    }
+    
+    function flagSocialMedia(platform) {
+        alert(platform + " has been flagged for review.");
+    }
+
+    
+    const ctx = document.getElementById('screenTimeChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            datasets: [{
+                label: 'Screen Time (hours)',
+                data: [2, 2.5, 3, 4, 3.5, 5, 2],
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<style>
+
+    #activityTable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    #activityTable th, #activityTable td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    #activityTable th {
+        background-color: #2c3e50;
+        color: white;
+    }
+
+
+    #search, #dateFilter {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #c0392b;
+    }
+
+    /* Chart Styling */
+    canvas {
+        margin-top: 20px;
+        width: 100% !important;
+        max-width: 600px;
+    }
+</style>

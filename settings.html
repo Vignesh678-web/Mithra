@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MITHRA</title> 
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7fc; margin: 0; padding: 0; }
+
+        .container { 
+            display: flex; 
+            max-width: 1200px; 
+            margin: 30px auto; 
+            padding: 20px; 
+        }
+
+        /* Sidebar style (left side of the screen) */
+        .sidebar {
+            width: 250px;
+            background-color: #7952c6;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            flex-shrink: 0; /* Prevent the sidebar from shrinking */
+        }
+
+        .sidebar h3 {
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Main content area */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 { text-align: center; color: #333; }
+
+        .card {
+            background: #eef2ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-container { display: flex; gap: 10px; justify-content: center; }
+        .avatar-container img { width: 80px; height: 80px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; }
+        .avatar-container img.selected { border-color: #4CAF50; }
+
+        .username-input, .settings-select, .settings-input {
+            display: block;
+            width: 100%;
+            margin: 10px auto;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .btn-save {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-save:hover {
+            background: #45a049;
+        }
+
+        .preview {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .preview img { width: 100px; height: 100px; border-radius: 50%; }
+
+        /* Responsive Layout */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .main-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar (Settings Sidebar) -->
+        <div class="sidebar">
+            <h3>MITHRA Settings</h3>
+            <ul>
+                <li><a href="#select-avatar">👦 Select Kid's Avatar</a></li>
+                <li><a href="#change-username">📝 Change Username</a></li>
+                <li><a href="#parental-controls">🔧 Parental Controls</a></li>
+                <li><a href="#security-settings">🔐 Security Settings</a></li>
+                <li><a href="#account-management">👤 Account Management</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <h2>MITHRA - Settings & Account Management</h2>
+
+            <div class="card" id="select-avatar">
+                <h3>👦 Select Kid's Avatar</h3>
+                <div class="avatar-container" id="avatarSelection">
+                    <img src="avatar1.jpg" alt="Avatar 1" onclick="selectAvatar(this)">
+                    <img src="avatar2.jpg" alt="Avatar 2" onclick="selectAvatar(this)">
+                    <img src="avatar3.jpg" alt="Avatar 3" onclick="selectAvatar(this)">
+                </div>
+            </div>
+
+            <div class="card" id="change-username">
+                <h3>📝 Change Username</h3>
+                <input type="text" class="username-input" id="username" placeholder="Enter child's name" oninput="updatePreview()">
+            </div>
+
+            <div class="card" id="parental-controls">
+                <h3>🔧 Parental Controls</h3>
+                <label>Safe Browsing Mode:</label>
+                <select class="settings-select" id="safeBrowsing">
+                    <option value="enabled">Enabled</option>
+                    <option value="disabled">Disabled</option>
+                </select>
+
+                <label>Screen Time Limit (hours):</label>
+                <input type="number" class="settings-input" id="screenTime" min="0" max="12" value="2">
+
+                <label>Blocked Websites:</label>
+                <input type="text" class="settings-input" id="blockedSites" placeholder="Enter websites separated by commas">
+            </div>
+
+            <div class="card" id="security-settings">
+                <h3>🔐 Security Settings</h3>
+                <label>Change Password:</label>
+                <input type="password" class="settings-input" id="password" placeholder="New password">
+
+                <label>Enable 2FA:</label>
+                <select class="settings-select" id="twoFA">
+                    <option value="enabled">Enabled</option>
+                    <option value="disabled">Disabled</option>
+                </select>
+
+                <label>Manage Authorized Devices:</label>
+                <input type="text" class="settings-input" id="devices" placeholder="List trusted devices">
+            </div>
+
+            <div class="card" id="account-management">
+                <h3>👤 Account Management</h3>
+                <label>Edit Profile (Email):</label>
+                <input type="email" class="settings-input" id="email" placeholder="Enter email">
+
+                <label>Subscription & Billing:</label>
+                <select class="settings-select" id="subscription">
+                    <option value="basic">Basic Plan</option>
+                    <option value="premium">Premium Plan</option>
+                </select>
+
+                <button class="btn-save" onclick="deleteAccount()">❌ Delete Account</button>
+            </div>
+
+            <button class="btn-save" onclick="saveSettings()">💾 Save Changes</button>
+
+            <div class="preview">
+                <h3>🔍 Preview</h3>
+                <img id="previewAvatar" src="avatar1.jpg" alt="Selected Avatar">
+                <p id="previewUsername">Child's Name</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedAvatar = "avatar1.jpg";
+
+        function selectAvatar(img) {
+            document.querySelectorAll(".avatar-container img").forEach(el => el.classList.remove("selected"));
+            img.classList.add("selected");
+            selectedAvatar = img.src;
+            document.getElementById("previewAvatar").src = selectedAvatar;
+        }
+
+        function updatePreview() {
+            const username = document.getElementById("username").value;
+            document.getElementById("previewUsername").innerText = username || "Child's Name";
+        }
+
+        function saveSettings() {
+            const username = document.getElementById("username").value;
+            const safeBrowsing = document.getElementById("safeBrowsing").value;
+            const screenTime = document.getElementById("screenTime").value;
+            const blockedSites = document.getElementById("blockedSites").value;
+            const password = document.getElementById("password").value;
+            const twoFA = document.getElementById("twoFA").value;
+            const devices = document.getElementById("devices").value;
+            const email = document.getElementById("email").value;
+            const subscription = document.getElementById("subscription").value;
+
+            alert(`Settings Saved!
+Username: ${username}
+Avatar: ${selectedAvatar}
+Safe Browsing: ${safeBrowsing}
+Screen Time Limit: ${screenTime} hrs
+Blocked Sites: ${blockedSites}
+2FA: ${twoFA}
+Devices: ${devices}
+Email: ${email}
+Subscription: ${subscription}`);
+        }
+
+        function deleteAccount() {
+            const confirmDelete = confirm("Are you sure you want to delete your account? This action cannot be undone.");
+            if (confirmDelete) {
+                alert("Your account has been deleted.");
+            }
+        }
+    </script>
+</body>
+</html>
