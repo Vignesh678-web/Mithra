@@ -5,19 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackElement = document.getElementById('feedback');
     const meterFillElement = document.getElementById('meterFill');
 
-    generateBtn.addEventListener('click', generatePassword);
-    userPasswordInput.addEventListener('input', checkStrength);
+    generateBtn.addEventListener('click', () => {
+        const password = generatePassword();
+        generatedPasswordElement.textContent = `Generated Password: ${password}`;
+        userPasswordInput.value = password;
+        updateFeedback(4); // Set max strength for generated password
+    });
+
+    userPasswordInput.addEventListener('input', () => {
+        const password = userPasswordInput.value;
+        const strength = calculateStrength(password);
+        console.log("Password strength:", strength);
+        updateFeedback(strength);
+    });
 
     function generatePassword() {
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
-        const password = Array(12).fill().map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
-        generatedPasswordElement.textContent = `Generated Password: ${password}`;
-    }
-
-    function checkStrength() {
-        const password = userPasswordInput.value;
-        const strength = calculateStrength(password);
-        updateFeedback(strength);
+        return Array.from({ length: 16 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
     }
 
     function calculateStrength(password) {
@@ -26,11 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (/[A-Z]/.test(password)) strength++;
         if (/[a-z]/.test(password)) strength++;
         if (/[0-9]/.test(password)) strength++;
-        if (/[!-+]/.test(password)) strength++;
+        if (/[^A-Za-z0-9]/.test(password)) strength++;
         return strength;
     }
 
     function updateFeedback(strength) {
+        console.log("Updating feedback for strength:", strength);
         const feedbacks = [
             { width: "20%", color: "red", message: "Very weak! Add more variety." },
             { width: "40%", color: "orange", message: "Weak! Keep improving." },
@@ -40,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         const { width, color, message } = feedbacks[strength] || feedbacks[0];
-        
+
         meterFillElement.style.width = width;
         meterFillElement.style.backgroundColor = color;
         feedbackElement.textContent = message;
